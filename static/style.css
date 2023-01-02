@@ -258,3 +258,12 @@
     margin-top: 2rem; 
     color:rgb(37, 150, 190);
   }
+
+
+  .titleclass{
+    color:black;
+  }
+
+  .titleclass:hover{
+    color:red;
+  }
