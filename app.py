@@ -312,19 +312,16 @@ def delete_article(article_id):
 
 # FLASK APP ROUTE BELOW HERE
 
-@app.route('/')
-def base_page():
-    return render_template('/homepage.html')
 
-# @app.route('/')
-# def index_page():
-#     """Renders html template that includes some JS - NOT PART OF JSON API!"""
-#     category = Category.query.all()
-#     article = Article.query.limit(41).all()
-#     source = Source.query.limit(33).all()
-#     c=Category.query.filter_by(name="general").first()
-#     catart = c.category_article
-#     return render_template('homepage.html', article=article, category=category, source=source, catart=catart)
+@app.route('/')
+def index_page():
+    """Renders html template that includes some JS - NOT PART OF JSON API!"""
+    category = Category.query.all()
+    article = Article.query.limit(41).all()
+    source = Source.query.limit(33).all()
+    c=Category.query.filter_by(name="general").first()
+    catart = c.category_article
+    return render_template('homepage.html', article=article, category=category, source=source, catart=catart)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -476,6 +473,7 @@ def add_favorite(id):
 @app.route('/search')
 def search_page():
     return render_template("/searchform.html")
+    
 @app.route('/sortdata')
 def sort_page():
     qvalue = request.form['q']
