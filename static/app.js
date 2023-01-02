@@ -1,4 +1,4 @@
-const BASE_URL = "https://ppnewsapp.herokuapp.com";
+const BASE_URL = "https://ppnews.herokuapp.com";
 // const BASE_URL = "http://127.0.0.1:5000";
 
 $(document).on('click', '#iBtn', function(e){ 
