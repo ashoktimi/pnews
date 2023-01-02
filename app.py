@@ -314,7 +314,7 @@ def delete_article(article_id):
 
 @app.route('/')
 def base_page():
-    return render_template('/base.html')
+    return render_template('/homepage.html')
 
 # @app.route('/')
 # def index_page():
