@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+<link rel="stylesheet" href="/static/style.css">
+{% block content %}
+<style>
+  body{background-color:black;}
+</style>
+<h3>Filter by dates and keyword:</h3>
+<div class="search-container"> 
+    <form id="filterForm">              
+        <input type="text" name="q" placeholder="Search.." id="searchtext" required>
+
+        <label class="formlabel" for="fromvalue">From Date</label>
+        <input type="date" name="fromvalue" id="fromvalue">
+
+        <label class="formlabel" for="tovalue">To Date</label>
+        <input type="date" name="tovalue" id="tovalue">        
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+</div>  
+{% endblock %}

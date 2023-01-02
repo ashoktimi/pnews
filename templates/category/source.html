@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+ {% block content %}
+ <div style="display:flex; justify-content: center;">
+  <div class="pos-f-t">
+    <div class="collapse" id="navbarToggleExternalContent">
+      <div class="bg-dark p-4">
+        {% if  g.user %}
+          <a class="nav-category"  href="/">US</a>
+          <a class="nav-category"  href="/">World</a>
+          {% for c in category %}
+          <a class="nav-category"  href="/categories/{{c.name}}/articles">{{c.name}}</a>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+    <div class="row container">
+      <style>
+        body{background-color:rgb(194, 226, 238);}
+      </style>
+        <nav class="navbar navbar-dark bg-dark" style="display:flex; justify-content:space-around;">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" 
+                aria-controls="navbarToggleExternalContent" 
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <button id="iBtn">Pnews</button>
+            <ul class="nav-ul" style="width:80%">        
+              <button type="button" class="btn btn-link categoryBtn" data-name="general" > General</button>
+              <button type="button" class="btn btn-link categoryBtn" data-name="science" >Science</button>
+              <button type="button" class="btn btn-link categoryBtn" data-name="technology" >Technology</button>
+              <button type="button" class="btn btn-link categoryBtn" data-name="health" >Health</button>
+              <button type="button" class="btn btn-link categoryBtn" data-name="entertainment" >Entertainment</button>
+              <button type="button" class="btn btn-link categoryBtn" data-name="sports" >Sports</button>
+              <button type="button" class="btn btn-link categoryBtn" data-name="business" >Business</button>            
+            </ul>
+        </nav> 
+        <h3 class="cat-source">Source for all Categories</h3>
+        <div class="row searchRowcolor">
+            <div class="col-12 col-sm-6 col-xl-4 bg-danger barHeight"></div>
+            <div class="col-12 col-sm-6 col-xl-4 bg-info barHeight"></div>
+            <div class="col-12 col-sm-6 col-xl-4 bg-warning barHeight"></div>
+        </div> 
+      {% for source in source_data %}              
+      <div class="col-sm-6 col-xl-4" style="margin-top:1rem;">
+        <div class="card">
+          <div class="card-body">
+            <a class="card-text cardclass" href="{{source.url}}">
+              <p class="titleclass" >{{source.name}}</p>
+            </a>
+            <small>{{source.description}}</small>                    
+          </div>
+        </div>        
+      </div> 
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

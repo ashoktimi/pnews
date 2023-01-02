@@ -1,0 +1,4 @@
+__pycache__
+venv/
+mypackage/__pycache__
+junkfile.txt

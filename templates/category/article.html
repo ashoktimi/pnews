@@ -1,0 +1,78 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="pos-f-t">
+  <div class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-dark p-4">
+      {% if  g.user %}
+      <a class="nav-category"  href="/">US</a>
+      <a class="nav-category"  href="/">World</a>
+      {% for c in category %}
+      <a class="nav-category"  href="/categories/{{c.name}}/articles">{{c.name}}</a>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+  <nav class="navbar navbar-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" 
+            aria-controls="navbarToggleExternalContent" 
+            aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a href="/" class="iBtn">Pnews</a>
+    <ul class="nav-ul">
+        {% if not g.user %}
+        {% if request.endpoint != None %}            
+        <li class="nav-li"><a href="/search"><span class="fa fa-search" id="searchBtn"></span></a></li>
+        {% endif %}            
+        <li class="nav-li"><a href="/register" class="nav-anchor">Sign up</a></li>
+        <li class="nav-li"><a href="/login" class="nav-anchor">Log in</a></li>
+        {% else %} 
+        {% for a in category %}        
+        <li class="nav-li"><a class="nav-anchor" href="/categories/{{a.name}}/articles">{{a.name}}</a></li>      
+        {% endfor %}           
+        <li class="nav-li"><a href="/logout"  class="nav-anchor">Log out</a></li>
+        {% endif %} 
+    </ul>
+  </nav>
+
+  <h1 class="head-name">{{cat}}</h1>
+ 
+  <div class="container-fluid containerBody">  
+    <div class="row rowColor">
+      <div class="col-12 col-sm-6 col-xl-4 bg-danger barHeight"></div>
+      <div class="col-12 col-sm-6 col-xl-4 bg-info barHeight"></div>
+      <div class="col-12 col-sm-6 col-xl-4 bg-warning barHeight"></div>
+    </div>
+    <div class="row">
+      {% for a in allarticle %}
+        {% if a.id in found_article %}                
+          <div class="col-12 col-sm-6 col-xl-4 maincard">         
+            <div class="card">
+              <img src="{{a.Image_URL}}" class="card-img-top cardimg" alt=""> 
+              <div class="card-body">
+                <a class="card-text" href={{a.url}}>
+                  <p>{{a.title}}</p>
+                </a>
+                <small>{{a.description}}</small> 
+              </div>       
+            </div>
+          </div>
+        {% else %}          
+          <div class="col-12 col-sm-6 col-xl-4 maincard">
+            <div class="card">
+              <img src="{{a.Image_URL}}" class="card-img-top cardimg" alt=""> 
+              <div class="card-body">
+              <a class="card-text" href={{a.url}}>
+                <p>{{a.title}}</p>
+              </a>
+              <small>{{a.description}}</small> 
+              </div>       
+            </div>
+          </div> 
+        {% endif %} 
+      {% endfor %}
+    </div>
+</div>
+</div>
+{% endblock %}

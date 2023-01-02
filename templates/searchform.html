@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+<link rel="stylesheet" href="/static/style.css">
+{% block content %}
+<style>
+  body{background-color:black;}
+</style>
+
+<h3>Search for News</h3>
+<div class="search-container">
+  <form id="myForm">
+    <input type="text" name="q" placeholder="Search by Title, Description or Content" id="searchtext" required>  
+    <select id="sortid" name="sortvalue" required>  
+      <option value="">Choose an sort option</option>    
+      <option value="relevancy" >relevancy</option>
+      <option value="popularity">popularity</option>
+      <option value="publishedAt">publishedAt</option>
+    </select>
+    <button type="submit" id="submitBtn"><i class="fa fa-search"></i></button>
+  </form>
+</div>
+{% endblock %}

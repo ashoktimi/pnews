@@ -1,0 +1,64 @@
+
+
+{% extends 'base.html' %}
+<link rel="stylesheet" href="/static/style.css">
+{% block content %}
+<div class="pos-f-t">
+  <div class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-dark p-4">
+      {% if  g.user %}
+      <a class="nav-category"  href="/">US</a>
+      <a class="nav-category"  href="/">World</a>
+      {% for c in category %}
+      <a class="nav-category"  href="/categories/{{c.name}}/articles">{{c.name}}</a>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+  <nav class="navbar navbar-light" >
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" 
+          aria-controls="navbarToggleExternalContent" 
+          aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a href="/" class="iBtn">Pnews</a>
+  <ul class="nav-ul" >
+    <li class="nav-li"><a href="/search"><span class="fa fa-search" id="searchBtn"></span></a></li>
+    {% if not g.user %}          
+    <li class="nav-li"><a href="/register" class="nav-anchor">Sign up</a></li>
+    <li class="nav-li"><a href="/login" class="nav-anchor">Log in</a></li>
+    {% else %}
+    <li class="nav-li"><a href="/articles" class="nav-anchor">Articles</a></li>
+    <li class="nav-li"><a href="/categories" class="nav-anchor">Categories</a></li>          
+    <li class="nav-li"><a href="/users/favorites/{{session['username']}}" class="nav-anchor">Favorites</a></li>           
+    <li class="nav-li"><a href="/logout"  class="nav-anchor">Log out</a></li>
+    {% endif %}           
+  </ul>
+</nav>
+
+  <p class="fav-art-cmnt">{{ user.username }}, favorite articles:</p>
+  <div class="container-fluid containerBody">
+    <div class="row rowColor">
+      <div class="col-12 col-sm-6 col-xl-4 bg-danger barHeight"></div>
+      <div class="col-12 col-sm-6 col-xl-4 bg-info barHeight"></div>
+      <div class="col-12 col-sm-6 col-xl-4 bg-warning barHeight"></div>
+    </div>
+    <div class="row">
+      {% for a in article %}
+      <div class="col-12 col-sm-6 col-xl-4 maincard">         
+        <div class="card" style="height: 100%">
+          <img src="{{a.Image_URL}}" class="card-img-top" 
+          style="height: 230px; width: 96%; margin:2%; background-color: bisque;" alt=""> 
+          <div class="card-body">          
+              <a class="card-text" href={{a.url}}>
+                <p>{{a.title}}</p>
+              </a>
+              <small>{{a.description}}</small>            
+          </div>       
+        </div>
+      </div>
+      {% endfor %} 
+    </div>
+  </div>
+</div>
+{% endblock %}
