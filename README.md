@@ -1,6 +1,6 @@
 # The News App
 ## Heroku site: 
-[Pnews](https://ppnews.herokuapp.com/)
+[Pnews](https://web-production-2c27.up.railway.app/)
 
 # API Integration:
 This project using a [News API](https://newsapi.org/docs) is a simple HTTP REST API for searching and retrieving live articles from all over the web.
