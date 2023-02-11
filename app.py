@@ -372,7 +372,7 @@ def login():
         if user:
             session['username'] = user.username
             flash(f"Hello, {user.username}!", "success")
-             return redirect("/articles")
+            return redirect("/articles")
         else:
             form.username.errors = ["Invalid username/password."]
             return render_template("user/login.html", form=form)
