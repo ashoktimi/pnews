@@ -1,5 +1,5 @@
 # The News App
-## Heroku site: 
+## Pnews site: 
 [Pnews](https://web-production-2c27.up.railway.app/)
 
 # API Integration:
