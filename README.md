@@ -29,7 +29,7 @@ This project using a [News API](https://newsapi.org/docs) is a HTTP REST API for
 - Install the required packages: pip install -r requirements.txt
 - Set the environment variables:
 
-    export FLASK_APP=app
+    export FLASK_APP=app <br>
     export FLASK_ENV=development
     
 - Create the database: flask db upgrade
