@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+ {% block content %}
+  <div class="pos-f-t">
+     <nav class="navbar navbar-expand-md navbar-light bg-dark sticky-top">
+      <div class="container-fluid">
+        <button id="iBtn">Pnews</button>
+        <button class="navbar-toggler" 
+           type="button" data-toggle="collapse" 
+           data-target="#navbarTogglerDemo03" 
+           aria-controls="navbarTogglerDemo03" 
+           aria-expanded="false" 
+           aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+          <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+            {% if not g.user %}    
+              <li class="nav-item"><a class="nav-link" href="/login">Log in</a></li>
+              <li class="nav-item"><a class="nav-link" href="/register">Sign up</a></li>    
+            {% else %}
+              <li class="nav-item" style="margin-top: 8px;"><a class="nav-link" style="color: white;" href="/articles">Articles</a></li>
+              <li class="nav-item" style="margin-top: 8px;"><a class="nav-link" style="color: white;"  href="/categories">Categories</a></li>
+              <li class="nav-item" style="margin-top: 8px;"><a class="nav-link" style="color: white;"  href="/sources">Sources</a></li>
+              <li class="nav-item" style="margin-top: 8px;"><a class="nav-link" style="color: white;"  href="/users/favorites/{{session['username']}}">Favorites</a></li>
+              <li class="nav-item" style="margin-top: 8px;"><a class="nav-link" href="/search"><span class="fa fa-search" id="searchBtn"></span></a></li>
+              <li class="nav-item"><a class="nav-link" href="/filter"><span class="fa fa-filter"></span></a></li>
+              <li class="nav-item" style="margin-top: 6px;"><a class="nav-link" style="color: white;"  href="/logout">Log out</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+      
+      <div class="container-fluid" style="width: 70%; margin-top: 2rem;">
+        <div class="row rowColor">
+          <div class="col-12 col-sm-6 col-xl-4 bg-danger barHeight"></div>
+          <div class="col-12 col-sm-6 col-xl-4 bg-info barHeight"></div>
+          <div class="col-12 col-sm-6 col-xl-4 bg-warning barHeight"></div>
+        </div>        
+        <div class="row" style="margin-top:1rem;">
+          {% for a in articles %}
+          <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+            <div class="card h-80">
+              <img src="{{ a.urlToImage }}" class="card-img-top" alt=""
+              onerror="this.onerror=null;this.src='static/images/spinning-image.png';"
+              style="height: 250px; object-fit: cover;"
+              >
+              <div class="card-body">
+                <h5 class="card-title">{{ a.title }}</h5>
+                {% if a.description %}
+                <p class="card-text">{{ a.description }}</p>
+                {% endif %}
+                <a href="{{ a.url }}" class="btn btn-primary">Read More</a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+    </div>
+  </div>  
+{% endblock %}

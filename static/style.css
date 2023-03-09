@@ -1,26 +1,14 @@
 /* css property for nav elements */
-  /* css property for hamburger button  */
-    .nav-category{
-      text-transform:uppercase; 
-      margin-left:5%;
-      color: rgb(228, 215, 215);
-    }
-    .nav-category:hover{
-      color:rgb(228, 215, 215) ;      
-    }
   /* css property for searchform output page */
     .navbar-dark{
       width: 100%;
       margin-top: 3rem;
       margin-left: 1.2%;
     }
+
   /* css property for blue bar, ul and li's */
     .navbar-light{
       background-image: url('/static/images/nav-bg.png');
-      height:60px;  
-      display: flex;
-      justify-content:center;
-      flex-direction:row;
     }
     .nav-ul {
       list-style-type: none;
@@ -43,6 +31,7 @@
       text-align: center;
       text-decoration: none;
     }
+
     .nav-anchor:hover{
       color:white;
       text-decoration: none;
@@ -182,11 +171,7 @@
     height: 100%;
   }
 
-  .cardimg{
-    height: 230px;
-    width: 96%;
-    margin:2%;
-  }
+
 
   .card-text{
     color: black;
@@ -267,3 +252,59 @@
   .titleclass:hover{
     color:red;
   }
+
+
+
+
+
+
+
+
+/* css for article/show.html */
+
+  .cardimg{
+    height: 230px;
+    object-fit: cover;
+  }
+
+
+/* css for home/homepage.html */
+  .navbar-nav {
+    margin-right: 10rem;
+    margin-left: auto;
+  }
+  
+  .navbar-nav li {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  
+  .nav-link {
+    font-weight: bold;
+    text-transform: capitalize; 
+  }
+  
+  @media (max-width: 768px) {
+    .navbar-nav {
+      margin-left: auto;
+    }
+    .navbar-nav li {
+      margin-right: 0; 
+      margin-bottom: 0.5rem;
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

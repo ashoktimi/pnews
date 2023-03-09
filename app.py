@@ -1,7 +1,7 @@
 import os
 import requests
-import json
-import psycopg2
+# import json
+# import psycopg2
 from flask import Flask, render_template, request, flash, redirect, session, jsonify, g, abort
 from mypackage.models import Category, connect_db, db, Article, User, Favorite, CategoryArticle, Source
 from mypackage.forms import RegisterForm, LoginForm, DeleteForm
@@ -311,18 +311,7 @@ def delete_article(article_id):
 #################################################################################################
 
 # FLASK APP ROUTE BELOW HERE
-
-
-@app.route('/')
-def index_page():
-    """Renders html template that includes some JS - NOT PART OF JSON API!"""
-    category = Category.query.all()
-    article = Article.query.limit(41).all()
-    source = Source.query.limit(33).all()
-    c=Category.query.filter_by(name="general").first()
-    catart = c.category_article
-    return render_template('homepage.html', article=article, category=category, source=source, catart=catart)
-
+# Route to register an user.
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     """Register a user: produce form and handle form submission."""
@@ -348,13 +337,11 @@ def register():
 
         flash("Signup successful.", 'success') 
         return redirect("/login")
-
-
     else:
         return render_template("user/register.html", form=form) 
 
 
-
+# Route to login for an user.
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     """Produce login form or handle login."""
@@ -379,7 +366,7 @@ def login():
 
     return render_template("user/login.html", form=form)
 
-
+# Route to logout for an user.
 @app.route("/logout")
 def logout():
     """Handle logout of user."""
@@ -387,20 +374,27 @@ def logout():
     flash("You have successfully logged out.", 'success')
     return redirect("/login")
 
+# Route to "/".
+# which returns the list of articles from a api and display them on page.
+@app.route('/')
+def get_articles():
+    url = f'https://newsapi.org/v2/top-headlines?country=us&apiKey={API_SECRET_KEY}'
+    response = requests.get(url)
+    articles = response.json()['articles'][:15]
+    return render_template('home/homepage.html', articles=articles)
 
-
+# Route for "/articles" which gets articles and user articles from database
 @app.route('/articles')
 def show_article():
     if "username" not in session:
         raise Unauthorized()
     username = session['username']
-    article = Article.query.all()
+    article = Article.query.limit(45).all()
     user = User.query.filter_by(username=username).first()
     favart = Favorite.query.filter_by(user_id=user.id)
     found_article = [a.favoriteArticle_id for a in favart]
-    category = Category.query.all()
     return render_template('article/show.html', 
-                            article=article, category=category, found_article=found_article)
+                            article=article, found_article=found_article)
 
 
 @app.route('/categories')
@@ -408,18 +402,17 @@ def show_categories():
     if "username" not in session:
         raise Unauthorized()
     category = Category.query.all()
-    article = Article.query.all()
+    article = Article.query.all()[:30]
     return render_template('category/show.html', category=category, article=article)
 
 @app.route('/sources')
 def show_sources():
     if "username" not in session:
         raise Unauthorized()
-    category = Category.query.all()
     source_data = Source.query.all()
     source = db.session.query(Source.category).distinct().all()
-    return render_template('category/source.html', category=category, 
-            sources=source, source_data=source_data)
+    return render_template('category/source.html',
+                            sources=source, source_data=source_data)
 
 
 @app.route('/categories/<cat_name>/articles')
@@ -427,25 +420,24 @@ def show_category(cat_name):
     if "username" not in session:
         raise Unauthorized()
     username = session['username']
-    category=Category.query.all()
+    category = Category.query.all()
     c=Category.query.filter_by(name=cat_name).first()
     catart = c.category_article
     user = User.query.filter_by(username=username).first()
     favart = Favorite.query.filter_by(user_id=user.id)
     found_article = [a.favoriteArticle_id for a in favart]
     return render_template('category/article.html', 
-                            allarticle=catart, cat=cat_name, category=category, found_article=found_article)
+                            allarticle=catart, cat=cat_name, category= category,  found_article=found_article)
 
 
 @app.route('/users/favorites/<username>')
 def favorite_page(username):
     if "username" not in session or username != session['username']:
         raise Unauthorized()
-    category=Category.query.all()
     user = User.query.filter_by(username=username).first()
     article = user.user_article
     return render_template("/user/favorites.html", 
-                         user=user, category=category, article=article)
+                         user=user, article=article)
 
 @app.route('/favorites/articles/<int:id>')
 def add_favorite(id):
@@ -478,12 +470,6 @@ def search_page():
 def sort_page():
     qvalue = request.form['q']
     return render_template("/filterpage.html", qvalue=qvalue)
-
-
-@app.route('/demo')
-def demo_page():
-    return render_template('/demo.html')
-
 
 
 @app.route('/filter')

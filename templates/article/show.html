@@ -1,39 +1,36 @@
-
 {% extends 'base.html' %}
 {% block content %}
 <div class="pos-f-t">
-  <div class="collapse" id="navbarToggleExternalContent">
-    <div class="bg-dark p-4">
-      {% if  g.user %}
-      <a class="nav-category"  href="/">US</a>
-      <a class="nav-category"  href="/">World</a>
-      {% for c in category %}
-      <a class="nav-category"  href="/categories/{{c.name}}/articles">{{c.name}}</a>
-      {% endfor %}
-      {% endif %}
+  <nav class="navbar navbar-expand-md navbar-light bg-dark sticky-top">
+    <div class="container-fluid">
+      <button id="iBtn">Pnews</button>
+      <button class="navbar-toggler" 
+         type="button" data-toggle="collapse" 
+         data-target="#navbarTogglerDemo03" 
+         aria-controls="navbarTogglerDemo03" 
+         aria-expanded="false" 
+         aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+          {% if not g.user %}    
+            <li class="nav-item"><a class="nav-link" href="/login">Log in</a></li>
+            <li class="nav-item"><a class="nav-link" href="/register">Sign up</a></li>    
+          {% else %}
+            <li class="nav-item" style="margin-top: 8px;"><a class="nav-link" style="color: white;" href="/articles">Articles</a></li>
+            <li class="nav-item" style="margin-top: 8px;"><a class="nav-link" style="color: white;"  href="/categories">Categories</a></li>
+            <li class="nav-item" style="margin-top: 8px;"><a class="nav-link" style="color: white;"  href="/sources">Sources</a></li>
+            <li class="nav-item" style="margin-top: 8px;"><a class="nav-link" style="color: white;"  href="/users/favorites/{{session['username']}}">Favorites</a></li>
+            <li class="nav-item" style="margin-top: 8px;"><a class="nav-link" href="/search"><span class="fa fa-search" id="searchBtn"></span></a></li>
+            <li class="nav-item"><a class="nav-link" href="/filter"><span class="fa fa-filter"></span></a></li>
+            <li class="nav-item" style="margin-top: 6px;"><a class="nav-link" style="color: white;"  href="/logout">Log out</a></li>
+          {% endif %}
+        </ul>
+      </div>
     </div>
-  </div>
-<nav class="navbar navbar-light" >
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" 
-          aria-controls="navbarToggleExternalContent" 
-          aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <button id="iBtn">Pnews</button>
-  <ul class="nav-ul" >
-    <li class="nav-li"><a href="/search" ><span class="fa fa-search" id="searchBtn"></span></a></li>
-    {% if not g.user %}   
-    <li class="nav-li"><a href="/register" class="nav-anchor">Sign up</a></li>
-    <li class="nav-li"><a href="/login" class="nav-anchor">Log in</a></li>
-    {% else %}
-    <li class="nav-li"><a href="/articles" class="nav-anchor">Articles</a></li>
-    <li class="nav-li"><a href="/categories" class="nav-anchor">Categories</a></li> 
-    <li class="nav-li"><a href="/sources" class="nav-anchor">Sources</a></li>              
-    <li class="nav-li"><a href="/users/favorites/{{session['username']}}" class="nav-anchor">Favorites</a></li>          
-    <li class="nav-li"><a href="/logout"  class="nav-anchor">Log out</a></li>
-    {% endif %}           
-  </ul>
-</nav>
+  </nav>
+
 <div class="container-fluid containerBody">
   <div class="row rowColor">
     <div class="col-12 col-sm-6 col-xl-4 bg-danger barHeight"></div>
@@ -46,7 +43,9 @@
   {% if a.id in found_article %}                 
   <div class="col-12 col-sm-6 col-xl-4 maincard" >         
     <div class="card">
-      <img src="{{a.Image_URL}}" class="card-img-top cardimg" alt=""> 
+      <img src="{{a.Image_URL}}" class="card-img-top cardimg" alt=""
+      onerror="this.onerror=null;this.src='static/images/spinning-image.png';"
+      > 
       <div class="card-body">          
         <a class="card-text" href={{a.url}}>
           <p>{{a.title}}</p>
@@ -61,7 +60,8 @@
    {% else %}          
     <div class="col-12 col-sm-6 col-xl-4 maincard">
       <div class="card" style="height: 100%">
-        <img src="{{a.Image_URL}}" class="card-img-top cardimg" alt=""> 
+        <img src="{{a.Image_URL}}" class="card-img-top cardimg" alt=""
+        onerror="this.onerror=null;this.src='static/images/spinning-image.png';"> 
         <div class="card-body" >          
           <a class="card-text" href={{a.url}}>
             <p>{{a.title}}</p>
@@ -81,7 +81,8 @@
   {% for a in article %}
   <div class="col-12 col-sm-6 col-xl-4 maincard">         
     <div class="card" style="height: 100%">
-      <img src="{{a.Image_URL}}" class="card-img-top cardimg" alt=""> 
+      <img src="{{a.Image_URL}}" class="card-img-top cardimg" alt=""
+      onerror="this.onerror=null;this.src='static/images/spinning-image.png';"> 
       <div class="card-body">          
           <a class="card-text" href={{a.url}}>
             <p>{{a.title}}</p>

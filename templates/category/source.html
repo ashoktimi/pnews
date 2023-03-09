@@ -1,29 +1,12 @@
 {% extends 'base.html' %}
  {% block content %}
  <div style="display:flex; justify-content: center;">
-  <div class="pos-f-t">
-    <div class="collapse" id="navbarToggleExternalContent">
-      <div class="bg-dark p-4">
-        {% if  g.user %}
-          <a class="nav-category"  href="/">US</a>
-          <a class="nav-category"  href="/">World</a>
-          {% for c in category %}
-          <a class="nav-category"  href="/categories/{{c.name}}/articles">{{c.name}}</a>
-          {% endfor %}
-        {% endif %}
-      </div>
-    </div>
     <div class="row container">
       <style>
         body{background-color:rgb(194, 226, 238);}
       </style>
         <nav class="navbar navbar-dark bg-dark" style="display:flex; justify-content:space-around;">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" 
-                aria-controls="navbarToggleExternalContent" 
-                aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <button id="iBtn">Pnews</button>
+          <button id="iBtn">Pnews</button>      
             <ul class="nav-ul" style="width:80%">        
               <button type="button" class="btn btn-link categoryBtn" data-name="general" > General</button>
               <button type="button" class="btn btn-link categoryBtn" data-name="science" >Science</button>
@@ -53,6 +36,5 @@
       </div> 
       {% endfor %}
     </div>
-  </div>
 </div>
 {% endblock %}
