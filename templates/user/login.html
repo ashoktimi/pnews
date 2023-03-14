@@ -6,8 +6,7 @@
 <div class="userdiv">
 <h1>Login to your account</h1>
 <form method="POST" id="user-login-form" class="userform">
-  {{form.csrf_token}}
-  
+
   {{form.hidden_tag()}}
 
   {% for field in form.errors %}
@@ -39,4 +38,3 @@
 
 {% endblock %}
 
-{{ form.csrf_token }}

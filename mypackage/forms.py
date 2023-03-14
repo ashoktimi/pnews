@@ -36,3 +36,19 @@ class RegisterForm(FlaskForm):
 
 class DeleteForm(FlaskForm):
     """Delete form -- this form is intentionally blank."""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -17,6 +17,7 @@ CURR_USER_KEY = "username"
 app = Flask(__name__)
 app.app_context().push()
 
+app.config['WTF_CSRF_ENABLED'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('data_url', 'postgresql:///capstone_database')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = False
