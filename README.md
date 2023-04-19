@@ -17,8 +17,8 @@ This project using a [News API](https://newsapi.org/docs) is a HTTP REST API for
 - News browsing for non-logged in users
 - Searching for the latest news by keyword and filtering by relevancy, popularity and published date
 - News for different categories
-- News sources
-- Adding news to favorites for logged in users
+- News sources 
+- Adding news to favorites for logged in users and
 - Searching for the latest news by keyword and date for logged in users
 
 ## Getting Started
